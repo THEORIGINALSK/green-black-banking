@@ -4,6 +4,7 @@ import { TransactionList } from "@/components/TransactionList";
 import { StatisticsChart } from "@/components/StatisticsChart";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Link, useNavigate } from "react-router-dom";
 
 const mockTransactions = [
   {
@@ -37,6 +38,8 @@ const mockChartData = [
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-bank-background text-white flex">
       {/* Sidebar */}
@@ -53,13 +56,13 @@ const Index = () => {
           <div className="space-y-2">
             <p className="text-muted text-sm">Personal</p>
             <div className="space-y-1">
-              <Button variant="ghost" className="w-full justify-start text-bank-green">
+              <Button variant="ghost" className="w-full justify-start text-bank-green" onClick={() => navigate('/')}>
                 📊 Overview
               </Button>
-              <Button variant="ghost" className="w-full justify-start">
+              <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/transactions')}>
                 💱 Transactions
               </Button>
-              <Button variant="ghost" className="w-full justify-start">
+              <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/settings')}>
                 ⚙️ Settings
               </Button>
             </div>
@@ -68,10 +71,10 @@ const Index = () => {
           <div className="space-y-2">
             <p className="text-muted text-sm">Society</p>
             <div className="space-y-1">
-              <Button variant="ghost" className="w-full justify-start">
+              <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/society')}>
                 📊 Overview
               </Button>
-              <Button variant="ghost" className="w-full justify-start">
+              <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/society/transactions')}>
                 💱 Transactions
               </Button>
             </div>
