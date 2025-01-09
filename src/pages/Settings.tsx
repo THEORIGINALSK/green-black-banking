@@ -1,13 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { BellIcon, ShieldIcon, UserIcon } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 const Settings = () => {
   return (
     <div className="min-h-screen bg-bank-background text-white p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Settings</h1>
-      </div>
+      <PageHeader title="Settings" />
 
       <div className="grid gap-6">
         <Card className="p-6 bg-bank-card">

@@ -47,11 +47,13 @@ const Index = () => {
       {/* Sidebar */}
       <div className="w-64 bg-bank-card p-6 flex flex-col">
         <div className="mb-10">
-          <h1 className="text-2xl font-bold font-orbitron">
-            <span className="text-bank-green">WIIC CITY</span>
-            <br />
-            <span className="text-bank-purple">BANKING</span>
-          </h1>
+          <Link to="/" className="block">
+            <h1 className="text-2xl font-bold">
+              <span className="text-bank-green">WIIC CITY</span>
+              <br />
+              <span className="text-bank-purple">BANKING</span>
+            </h1>
+          </Link>
         </div>
 
         <div className="space-y-8">

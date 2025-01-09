@@ -3,6 +3,7 @@ import { TransactionList } from "@/components/TransactionList";
 import { StatisticsChart } from "@/components/StatisticsChart";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { PageHeader } from "@/components/PageHeader";
 
 const mockTransactions = [
   {
@@ -39,12 +40,10 @@ const SocietyOverview = () => {
   return (
     <div className="min-h-screen bg-bank-background text-white flex">
       <div className="flex-1 p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">Society Overview</h1>
-          <div className="flex items-center gap-4">
-            <span className="text-bank-purple">Business Balance: $25,600 USD</span>
-          </div>
-        </div>
+        <PageHeader 
+          title="Society Overview"
+          rightContent={<span className="text-bank-purple">Business Balance: $25,600 USD</span>}
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">

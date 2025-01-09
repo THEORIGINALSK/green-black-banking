@@ -1,4 +1,5 @@
 import { TransactionList } from "@/components/TransactionList";
+import { PageHeader } from "@/components/PageHeader";
 
 const mockTransactions = [
   {
@@ -36,10 +37,10 @@ const mockTransactions = [
 const Transactions = () => {
   return (
     <div className="min-h-screen bg-bank-background text-white p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Transactions</h1>
-        <span className="text-bank-purple">Wallet: $2,600 USD</span>
-      </div>
+      <PageHeader 
+        title="Transactions"
+        rightContent={<span className="text-bank-purple">Wallet: $2,600 USD</span>}
+      />
       
       <div className="bg-bank-card p-6 rounded-lg">
         <TransactionList transactions={mockTransactions} />
