@@ -1,4 +1,4 @@
-import { ArrowDownIcon } from "lucide-react";
+import { ArrowDownIcon, ArrowUpIcon } from "lucide-react";
 
 interface Transaction {
   id: string;
@@ -21,14 +21,20 @@ export const TransactionList = ({ transactions }: TransactionListProps) => {
         >
           <div className="flex items-center gap-3">
             <div className="p-2 bg-bank-background rounded-full">
-              <ArrowDownIcon className="w-4 h-4 text-bank-green" />
+              {transaction.amount.startsWith("+") ? (
+                <ArrowDownIcon className="w-4 h-4 text-bank-green" />
+              ) : (
+                <ArrowUpIcon className="w-4 h-4 text-bank-red" />
+              )}
             </div>
             <div>
               <p className="text-white font-medium">{transaction.type}</p>
               <p className="text-sm text-white/70">{transaction.description}</p>
             </div>
           </div>
-          <span className="text-bank-green font-medium">{transaction.amount}</span>
+          <span className={transaction.amount.startsWith("+") ? "text-bank-green" : "text-bank-red"} style={{ fontWeight: 500 }}>
+            {transaction.amount}
+          </span>
         </div>
       ))}
     </div>

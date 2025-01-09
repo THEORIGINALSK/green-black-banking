@@ -7,11 +7,10 @@ interface BankCardProps {
 
 export const BankCard = ({ status, expiry }: BankCardProps) => {
   return (
-    <Card className="w-full bg-gradient-to-br from-bank-card to-bank-card/50 p-6 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+    <Card className="w-full bg-gradient-to-br from-bank-card to-accent/10 p-6 relative overflow-hidden">
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
-          <span className="text-lg font-bold text-white">Proto Bank</span>
+          <span className="text-lg font-bold text-accent">Wiic City Bank</span>
           <span className="text-sm text-white/70">Platinum</span>
         </div>
         <div className="mt-4">
