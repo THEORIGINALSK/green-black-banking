@@ -5,6 +5,7 @@ import { StatisticsChart } from "@/components/StatisticsChart";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const mockTransactions = [
   {
@@ -39,6 +40,7 @@ const mockChartData = [
 
 const Index = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   return (
     <div className="min-h-screen bg-bank-background text-white flex">
@@ -81,7 +83,11 @@ const Index = () => {
           </div>
         </div>
 
-        <Button variant="ghost" className="mt-auto text-bank-red w-full justify-start">
+        <Button 
+          variant="ghost" 
+          className="mt-auto text-bank-red w-full justify-start"
+          onClick={logout}
+        >
           <LogOutIcon className="mr-2 h-4 w-4" /> Logout
         </Button>
       </div>
