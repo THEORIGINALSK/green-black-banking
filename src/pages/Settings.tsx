@@ -39,13 +39,6 @@ const Settings = () => {
     });
   };
 
-  const handle2FAToggle = () => {
-    toast({
-      title: "2FA Setup",
-      description: "Two-factor authentication setup will be implemented soon.",
-    });
-  };
-
   const handleNotificationToggle = (type: 'transaction' | 'login', enabled: boolean) => {
     if (type === 'transaction') {
       setTransactionAlerts(enabled);
@@ -118,28 +111,6 @@ const Settings = () => {
                   <Input type="password" placeholder="New PIN" className="bg-bank-background border-white/10" />
                   <Input type="password" placeholder="Confirm New PIN" className="bg-bank-background border-white/10" />
                   <Button className="w-full" onClick={handlePINChange}>Update PIN</Button>
-                </div>
-              </DialogContent>
-            </Dialog>
-
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button 
-                  className="w-full bg-bank-card hover:bg-bank-card/90 border border-white/10"
-                  onClick={handle2FAToggle}
-                >
-                  Two-Factor Authentication
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="bg-bank-card border-white/10">
-                <DialogHeader>
-                  <DialogTitle>Setup 2FA</DialogTitle>
-                </DialogHeader>
-                <div className="space-y-4 p-4">
-                  <p className="text-sm text-white/70">
-                    Two-factor authentication adds an extra layer of security to your account.
-                  </p>
-                  <Button className="w-full" onClick={handle2FAToggle}>Enable 2FA</Button>
                 </div>
               </DialogContent>
             </Dialog>
