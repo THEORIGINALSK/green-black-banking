@@ -116,7 +116,11 @@ const Index = () => {
             <Card className="p-6 bg-bank-card">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold">Last Transactions</h2>
-                <Button variant="ghost" className="text-bank-green">
+                <Button 
+                  variant="ghost" 
+                  className="text-bank-green"
+                  onClick={() => navigate('/transactions')}
+                >
                   VIEW ALL
                 </Button>
               </div>
