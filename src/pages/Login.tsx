@@ -58,7 +58,7 @@ const Login = () => {
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="bg-bank-background border-gray-700"
+              className="bg-bank-background border-gray-700 text-white placeholder:text-gray-500"
             />
           </div>
           <div>
@@ -67,7 +67,7 @@ const Login = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="bg-bank-background border-gray-700"
+              className="bg-bank-background border-gray-700 text-white placeholder:text-gray-500"
             />
           </div>
           <Button
