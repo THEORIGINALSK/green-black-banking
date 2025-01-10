@@ -8,20 +8,29 @@ import { useToast } from "@/components/ui/use-toast";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isRegistering, setIsRegistering] = useState(false);
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, register } = useAuth();
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await login(username, password);
+      if (isRegistering) {
+        await register(username, password);
+        toast({
+          title: "Success",
+          description: "Account created successfully!",
+        });
+      } else {
+        await login(username, password);
+      }
       navigate("/");
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Invalid credentials",
+        description: error instanceof Error ? error.message : "An error occurred",
       });
     }
   };
@@ -40,7 +49,9 @@ const Login = () => {
             </span>
           </h1>
           <div className="absolute -inset-4 bg-gradient-to-r from-bank-green/0 via-bank-green/10 to-bank-purple/0 blur-lg opacity-50 animate-pulse"></div>
-          <p className="text-gray-400 relative z-10">Please login to continue</p>
+          <p className="text-gray-400 relative z-10">
+            {isRegistering ? "Create a new account" : "Please login to continue"}
+          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
@@ -66,8 +77,19 @@ const Login = () => {
             type="submit"
             className="w-full bg-bank-green hover:bg-bank-green/90 text-bank-background font-semibold"
           >
-            Login
+            {isRegistering ? "Register" : "Login"}
           </Button>
+          <div className="text-center">
+            <button
+              type="button"
+              onClick={() => setIsRegistering(!isRegistering)}
+              className="text-bank-green hover:text-bank-green/90 text-sm font-medium"
+            >
+              {isRegistering
+                ? "Already have an account? Login"
+                : "Don't have an account? Register"}
+            </button>
+          </div>
         </form>
       </div>
     </div>
