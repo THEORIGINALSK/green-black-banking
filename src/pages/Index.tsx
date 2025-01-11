@@ -11,6 +11,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 
+const QUICK_AMOUNTS = [100, 500, 1000, 5000];
+
 const mockTransactions = [
   {
     id: "1",
@@ -42,8 +44,6 @@ const mockChartData = [
   { date: "8 Jan", amount: 2500 },
 ];
 
-const QUICK_AMOUNTS = [100, 500, 1000, 5000];
-
 const Index = () => {
   const navigate = useNavigate();
   const { logout } = useAuth();
@@ -51,8 +51,8 @@ const Index = () => {
   const [isDepositOpen, setIsDepositOpen] = useState(false);
   const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
   const [amount, setAmount] = useState("");
-  const [balance, setBalance] = useState(2600);
   const [selectedQuickAmount, setSelectedQuickAmount] = useState<number | null>(null);
+  const [balance, setBalance] = useState(2600);
 
   const handleQuickAmountSelect = (value: number) => {
     setSelectedQuickAmount(value);
@@ -82,6 +82,42 @@ const Index = () => {
 
     // Reset and close
     setIsDepositOpen(false);
+    setAmount("");
+    setSelectedQuickAmount(null);
+  };
+
+  const handleWithdraw = () => {
+    const numAmount = parseFloat(amount);
+    
+    if (isNaN(numAmount) || numAmount <= 0) {
+      toast({
+        title: "Invalid amount",
+        description: "Please enter a valid positive number",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (numAmount > balance) {
+      toast({
+        title: "❌ Insufficient funds",
+        description: "You don't have enough money in your account",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Update balance
+    setBalance(prev => prev - numAmount);
+
+    // Show success message
+    toast({
+      title: "💸 Withdrawal successful!",
+      description: `Withdrawn $${numAmount.toLocaleString()} from your account`,
+    });
+
+    // Reset and close
+    setIsWithdrawOpen(false);
     setAmount("");
     setSelectedQuickAmount(null);
   };
@@ -267,6 +303,65 @@ const Index = () => {
               disabled={!amount}
             >
               Confirm Deposit
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Withdraw Dialog */}
+      <Dialog open={isWithdrawOpen} onOpenChange={setIsWithdrawOpen}>
+        <DialogContent className="bg-bank-card border-bank-purple/20 sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="text-white flex items-center gap-2">
+              <Minus className="h-5 w-5 text-bank-purple" />
+              Withdraw Money
+            </DialogTitle>
+            <DialogDescription className="text-white/60">
+              Choose an amount to withdraw from your account
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="grid gap-6">
+            <div className="grid grid-cols-2 gap-2">
+              {QUICK_AMOUNTS.map((quickAmount) => (
+                <Button
+                  key={quickAmount}
+                  variant="outline"
+                  className={`h-12 text-lg transition-all duration-300 ${
+                    selectedQuickAmount === quickAmount 
+                      ? 'bg-bank-purple text-bank-background border-bank-purple'
+                      : 'hover:border-bank-purple hover:text-bank-purple'
+                  }`}
+                  onClick={() => handleQuickAmountSelect(quickAmount)}
+                >
+                  ${quickAmount}
+                </Button>
+              ))}
+            </div>
+            
+            <div className="relative">
+              <Input
+                type="number"
+                value={amount}
+                onChange={(e) => {
+                  setAmount(e.target.value);
+                  setSelectedQuickAmount(null);
+                }}
+                placeholder="Enter custom amount"
+                className="bg-bank-background border-white/10 text-white placeholder:text-white/40"
+              />
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40">$</span>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button
+              className="w-full bg-bank-purple hover:bg-bank-purple/90 text-bank-background group"
+              onClick={handleWithdraw}
+              disabled={!amount}
+            >
+              Confirm Withdrawal
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </DialogFooter>
