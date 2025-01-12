@@ -28,7 +28,7 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#50fa7b",
+          DEFAULT: "#0FA0CE",
           foreground: "#0a0a0a",
         },
         secondary: {
@@ -48,10 +48,10 @@ export default {
           foreground: "#f8f8f2",
         },
         bank: {
-          background: "var(--bank-background)",
-          card: "var(--bank-card)",
-          green: "var(--bank-green)",
-          purple: "var(--bank-purple)",
+          background: "#0a0a0a",
+          card: "#1a1a1a",
+          green: "#0FA0CE",
+          purple: "#bd93f9",
           red: "#ff5555",
         },
       },
