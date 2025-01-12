@@ -176,7 +176,7 @@ const Index = () => {
         <div className="mb-10">
           <Link to="/" className="block">
             <h1 className="text-2xl font-bold">
-              <span className="text-bank-green">WIIC CITY</span>
+              <span className="text-bank-purple">WIIC CITY</span>
               <br />
               <span className="text-bank-purple">BANKING</span>
             </h1>
@@ -187,7 +187,7 @@ const Index = () => {
           <div className="space-y-2">
             <p className="text-muted text-sm">Personal</p>
             <div className="space-y-1">
-              <Button variant="ghost" className="w-full justify-start text-bank-green" onClick={() => navigate('/')}>
+              <Button variant="ghost" className="w-full justify-start text-bank-purple" onClick={() => navigate('/')}>
                 📊 Overview
               </Button>
               <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/transactions')}>
@@ -244,7 +244,7 @@ const Index = () => {
                 <h2 className="text-xl font-semibold">Last Transactions</h2>
                 <Button 
                   variant="ghost" 
-                  className="text-bank-green"
+                  className="text-bank-purple"
                   onClick={() => navigate('/transactions')}
                 >
                   VIEW ALL
@@ -274,7 +274,7 @@ const Index = () => {
               <h2 className="text-xl font-semibold mb-4">Actions</h2>
               <div className="space-y-3">
                 <Button 
-                  className="w-full bg-bank-green hover:bg-opacity-90 text-bank-background group transition-all duration-300"
+                  className="w-full bg-bank-purple hover:bg-opacity-90 text-bank-background group transition-all duration-300"
                   onClick={() => setIsDepositOpen(true)}
                 >
                   <Plus className="mr-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-300" />
@@ -302,10 +302,10 @@ const Index = () => {
 
       {/* Deposit Dialog */}
       <Dialog open={isDepositOpen} onOpenChange={setIsDepositOpen}>
-        <DialogContent className="bg-bank-card border-bank-green/20 sm:max-w-[425px]">
+        <DialogContent className="bg-bank-card border-bank-purple/20 sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
-              <Plus className="h-5 w-5 text-bank-green" />
+              <Plus className="h-5 w-5 text-bank-purple" />
               Deposit Money
             </DialogTitle>
             <DialogDescription className="text-white/60">
@@ -322,7 +322,7 @@ const Index = () => {
                   className={`h-12 text-lg transition-all duration-300 ${
                     selectedQuickAmount === quickAmount 
                       ? 'bg-bank-green text-bank-background border-bank-green'
-                      : 'hover:border-bank-green hover:text-bank-green bg-white/10 hover:bg-white/20'
+                      : 'hover:border-bank-purple hover:text-bank-purple bg-white/10 hover:bg-white/20'
                   }`}
                   onClick={() => handleQuickAmountSelect(quickAmount)}
                 >
@@ -348,7 +348,7 @@ const Index = () => {
 
           <DialogFooter>
             <Button
-              className="w-full bg-bank-green hover:bg-opacity-90 text-bank-background group"
+              className="w-full bg-bank-purple hover:bg-opacity-90 text-bank-background group"
               onClick={handleDeposit}
               disabled={!amount}
             >

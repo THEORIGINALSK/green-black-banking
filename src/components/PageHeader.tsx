@@ -17,7 +17,7 @@ export const PageHeader = ({ title, rightContent }: PageHeaderProps) => {
           variant="ghost"
           size="icon"
           onClick={() => navigate(-1)}
-          className="text-white hover:text-bank-green hover:scale-110 transition-all duration-300"
+          className="text-white hover:text-bank-purple hover:scale-110 transition-all duration-300"
         >
           <ArrowLeft className="h-5 w-5" />
         </Button>

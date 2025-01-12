@@ -22,20 +22,20 @@ export const TransactionList = ({ transactions }: TransactionListProps) => {
           <div className="flex items-center gap-3">
             <div className="p-2 bg-gradient-to-br from-bank-background to-bank-background/50 rounded-full group-hover:scale-110 transition-transform">
               {transaction.amount.startsWith("+") ? (
-                <ArrowDownIcon className="w-4 h-4 text-bank-green" />
+                <ArrowDownIcon className="w-4 h-4 text-bank-purple" />
               ) : (
                 <ArrowUpIcon className="w-4 h-4 text-bank-red" />
               )}
             </div>
             <div>
-              <p className="text-white font-medium group-hover:text-bank-green transition-colors">{transaction.type}</p>
+              <p className="text-white font-medium group-hover:text-bank-purple transition-colors">{transaction.type}</p>
               <p className="text-sm text-white/70">{transaction.description}</p>
             </div>
           </div>
           <span 
             className={`font-medium transition-all duration-300 ${
               transaction.amount.startsWith("+") 
-                ? "text-bank-green group-hover:text-bank-green/80" 
+                ? "text-bank-purple group-hover:text-bank-purple/80" 
                 : "text-bank-red group-hover:text-bank-red/80"
             }`}
           >

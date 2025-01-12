@@ -40,7 +40,7 @@ const Login = () => {
       <div className="w-full max-w-md space-y-8">
         <div className="text-center relative">
           <h1 className="text-4xl font-bold text-white mb-2 relative z-10 transition-transform hover:scale-105 duration-300">
-            <span className="text-bank-green inline-block animate-pulse hover:animate-none relative after:content-[''] after:absolute after:-inset-2 after:bg-bank-green/20 after:rounded-lg after:blur-lg after:opacity-0 hover:after:opacity-100 after:transition-opacity">
+            <span className="text-bank-purple inline-block animate-pulse hover:animate-none relative after:content-[''] after:absolute after:-inset-2 after:bg-bank-purple/20 after:rounded-lg after:blur-lg after:opacity-0 hover:after:opacity-100 after:transition-opacity">
               WIIC CITY
             </span>
             <br />
@@ -61,7 +61,7 @@ const Login = () => {
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-4 py-2 bg-bank-card border border-gray-700 rounded-md text-white placeholder:text-gray-500 focus:border-bank-green focus:ring-bank-green"
+              className="w-full px-4 py-2 bg-bank-card border border-gray-700 rounded-md text-white placeholder:text-gray-500 focus:border-bank-purple focus:ring-bank-purple"
             />
           </div>
           <div>
@@ -70,12 +70,12 @@ const Login = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 bg-bank-card border border-gray-700 rounded-md text-white placeholder:text-gray-500 focus:border-bank-green focus:ring-bank-green"
+              className="w-full px-4 py-2 bg-bank-card border border-gray-700 rounded-md text-white placeholder:text-gray-500 focus:border-bank-purple focus:ring-bank-purple"
             />
           </div>
           <Button
             type="submit"
-            className="w-full bg-bank-green hover:bg-bank-green/90 text-bank-background font-semibold"
+            className="w-full bg-bank-purple hover:bg-bank-purple/90 text-bank-background font-semibold"
           >
             {isRegistering ? "Register" : "Login"}
           </Button>
@@ -83,7 +83,7 @@ const Login = () => {
             <button
               type="button"
               onClick={() => setIsRegistering(!isRegistering)}
-              className="text-bank-green hover:text-bank-green/90 text-sm font-medium"
+              className="text-bank-purple hover:text-bank-purple/90 text-sm font-medium"
             >
               {isRegistering
                 ? "Already have an account? Login"
