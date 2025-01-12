@@ -50,7 +50,9 @@ const Index = () => {
   const { toast } = useToast();
   const [isDepositOpen, setIsDepositOpen] = useState(false);
   const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
+  const [isTransferOpen, setIsTransferOpen] = useState(false);
   const [amount, setAmount] = useState("");
+  const [recipientId, setRecipientId] = useState("");
   const [selectedQuickAmount, setSelectedQuickAmount] = useState<number | null>(null);
   const [balance, setBalance] = useState(2600);
 
@@ -122,9 +124,54 @@ const Index = () => {
     setSelectedQuickAmount(null);
   };
 
+  const handleTransfer = () => {
+    const numAmount = parseFloat(amount);
+    
+    if (isNaN(numAmount) || numAmount <= 0) {
+      toast({
+        title: "Invalid amount",
+        description: "Please enter a valid positive number",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!recipientId.trim()) {
+      toast({
+        title: "Invalid recipient",
+        description: "Please enter a recipient ID",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (numAmount > balance) {
+      toast({
+        title: "❌ Insufficient funds",
+        description: "You don't have enough money in your account",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Update balance
+    setBalance(prev => prev - numAmount);
+
+    // Show success message
+    toast({
+      title: "💸 Transfer successful!",
+      description: `Transferred $${numAmount.toLocaleString()} to ID: ${recipientId}`,
+    });
+
+    // Reset and close
+    setIsTransferOpen(false);
+    setAmount("");
+    setRecipientId("");
+    setSelectedQuickAmount(null);
+  };
+
   return (
     <div className="min-h-screen bg-bank-background text-white flex">
-      {/* Sidebar */}
       <div className="w-64 bg-bank-card p-6 flex flex-col">
         <div className="mb-10">
           <Link to="/" className="block">
@@ -241,7 +288,11 @@ const Index = () => {
                   <Minus className="mr-2 h-4 w-4" />
                   Withdraw
                 </Button>
-                <Button className="w-full bg-bank-card hover:bg-bank-card/90 border border-white/10">
+                <Button 
+                  className="w-full bg-bank-card hover:bg-bank-card/90 border border-white/10"
+                  onClick={() => setIsTransferOpen(true)}
+                >
+                  <ArrowRight className="mr-2 h-4 w-4" />
                   Transfer
                 </Button>
               </div>
@@ -250,7 +301,6 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Deposit Dialog */}
       <Dialog open={isDepositOpen} onOpenChange={setIsDepositOpen}>
         <DialogContent className="bg-bank-card border-bank-green/20 sm:max-w-[425px]">
           <DialogHeader>
@@ -362,6 +412,75 @@ const Index = () => {
               disabled={!amount}
             >
               Confirm Withdrawal
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Transfer Dialog */}
+      <Dialog open={isTransferOpen} onOpenChange={setIsTransferOpen}>
+        <DialogContent className="bg-bank-card border-white/10 sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="text-white flex items-center gap-2">
+              <ArrowRight className="h-5 w-5 text-white" />
+              Transfer Money
+            </DialogTitle>
+            <DialogDescription className="text-white/60">
+              Enter the recipient's ID and the amount to transfer
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="grid gap-6">
+            <div className="relative">
+              <Input
+                type="text"
+                value={recipientId}
+                onChange={(e) => setRecipientId(e.target.value)}
+                placeholder="Enter recipient ID"
+                className="bg-bank-background border-white/10 text-white placeholder:text-white/40"
+              />
+            </div>
+            
+            <div className="grid grid-cols-2 gap-2">
+              {QUICK_AMOUNTS.map((quickAmount) => (
+                <Button
+                  key={quickAmount}
+                  variant="outline"
+                  className={`h-12 text-lg transition-all duration-300 ${
+                    selectedQuickAmount === quickAmount 
+                      ? 'bg-white text-bank-background border-white'
+                      : 'hover:border-white hover:text-white'
+                  }`}
+                  onClick={() => handleQuickAmountSelect(quickAmount)}
+                >
+                  ${quickAmount}
+                </Button>
+              ))}
+            </div>
+            
+            <div className="relative">
+              <Input
+                type="number"
+                value={amount}
+                onChange={(e) => {
+                  setAmount(e.target.value);
+                  setSelectedQuickAmount(null);
+                }}
+                placeholder="Enter custom amount"
+                className="bg-bank-background border-white/10 text-white placeholder:text-white/40"
+              />
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40">$</span>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button
+              className="w-full bg-white hover:bg-white/90 text-bank-background group"
+              onClick={handleTransfer}
+              disabled={!amount || !recipientId}
+            >
+              Confirm Transfer
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </DialogFooter>
