@@ -4,6 +4,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 interface AuthContextType {
   isAuthenticated: boolean;
+  hasSociety: boolean;
   login: (username: string, password: string) => Promise<void>;
   register: (username: string, password: string) => Promise<void>;
   logout: () => void;
@@ -13,6 +14,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [hasSociety, setHasSociety] = useState(false); // New state for society access
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -42,6 +44,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     
     if (user) {
       setIsAuthenticated(true);
+      // For demo purposes, we'll set hasSociety to false by default
+      // In a real app, this would come from your backend
+      setHasSociety(false);
       navigate("/");
     } else {
       throw new Error("Invalid credentials");
@@ -50,11 +55,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const logout = () => {
     setIsAuthenticated(false);
+    setHasSociety(false);
     navigate("/login");
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, register, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, hasSociety, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

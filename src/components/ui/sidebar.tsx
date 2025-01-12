@@ -2,8 +2,11 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Link } from "react-router-dom"
 import { Settings, BarChart2, LogOut, Building2 } from "lucide-react"
+import { useAuth } from "@/contexts/AuthContext"
 
 export function Sidebar() {
+  const { hasSociety } = useAuth();
+
   return (
     <div className="h-screen w-64 bg-bank-background border-r border-white/10 flex flex-col">
       {/* Top Navigation Tabs */}
@@ -25,9 +28,11 @@ export function Sidebar() {
           <button className="w-full py-3 px-4 rounded-lg bg-bank-card text-bank-green border border-bank-green/20 hover:bg-bank-green/10 transition-all">
             Personal
           </button>
-          <button className="w-full py-3 px-4 rounded-lg bg-bank-card text-bank-purple border border-bank-purple/20 hover:bg-bank-purple/10 transition-all">
-            Society
-          </button>
+          {hasSociety && (
+            <button className="w-full py-3 px-4 rounded-lg bg-bank-card text-bank-purple border border-bank-purple/20 hover:bg-bank-purple/10 transition-all">
+              Society
+            </button>
+          )}
         </div>
       </div>
 
@@ -41,11 +46,13 @@ export function Sidebar() {
             <NavLink to="/settings" icon={Settings}>Settings</NavLink>
           </div>
 
-          {/* Society Section */}
-          <div className="space-y-2">
-            <NavLink to="/society" icon={Building2}>Overview</NavLink>
-            <NavLink to="/society/transactions" icon={BarChart2}>Transactions</NavLink>
-          </div>
+          {/* Society Section - Only show if user has society access */}
+          {hasSociety && (
+            <div className="space-y-2">
+              <NavLink to="/society" icon={Building2}>Overview</NavLink>
+              <NavLink to="/society/transactions" icon={BarChart2}>Transactions</NavLink>
+            </div>
+          )}
         </nav>
       </div>
 
