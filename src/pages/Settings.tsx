@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { BellIcon, ShieldIcon, UserIcon } from "lucide-react";
+import { BellIcon, ShieldIcon, UserIcon, PaintbrushIcon } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/components/ui/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { ThemeCustomizer } from "@/components/ThemeCustomizer";
 
 const Settings = () => {
   const { toast } = useToast();
@@ -56,6 +57,15 @@ const Settings = () => {
       <PageHeader title="Settings" />
 
       <div className="grid gap-6">
+        {/* Theme Customization Card */}
+        <Card className="p-6 bg-bank-card">
+          <div className="flex items-center gap-4 mb-4">
+            <PaintbrushIcon className="text-bank-purple" />
+            <h2 className="text-xl font-semibold">Theme Customization</h2>
+          </div>
+          <ThemeCustomizer />
+        </Card>
+
         <Card className="p-6 bg-bank-card">
           <div className="flex items-center gap-4 mb-4">
             <UserIcon className="text-bank-purple" />
