@@ -221,7 +221,6 @@ const Index = () => {
         </Button>
       </div>
 
-      {/* Main Content */}
       <div className="flex-1 p-6">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Overview</h1>
@@ -275,21 +274,21 @@ const Index = () => {
               <h2 className="text-xl font-semibold mb-4">Actions</h2>
               <div className="space-y-3">
                 <Button 
-                  className="w-full bg-bank-green hover:bg-bank-green/90 text-bank-background group transition-all duration-300"
+                  className="w-full bg-bank-green hover:bg-opacity-90 text-bank-background group transition-all duration-300"
                   onClick={() => setIsDepositOpen(true)}
                 >
                   <Plus className="mr-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-300" />
                   Deposit
                 </Button>
                 <Button 
-                  className="w-full bg-bank-purple hover:bg-bank-purple/90"
+                  className="w-full bg-bank-purple hover:bg-opacity-90"
                   onClick={() => setIsWithdrawOpen(true)}
                 >
                   <Minus className="mr-2 h-4 w-4" />
                   Withdraw
                 </Button>
                 <Button 
-                  className="w-full bg-bank-card hover:bg-bank-card/90 border border-white/10"
+                  className="w-full bg-white hover:bg-opacity-90 text-bank-background border border-white/10"
                   onClick={() => setIsTransferOpen(true)}
                 >
                   <ArrowRight className="mr-2 h-4 w-4" />
@@ -301,6 +300,7 @@ const Index = () => {
         </div>
       </div>
 
+      {/* Deposit Dialog */}
       <Dialog open={isDepositOpen} onOpenChange={setIsDepositOpen}>
         <DialogContent className="bg-bank-card border-bank-green/20 sm:max-w-[425px]">
           <DialogHeader>
@@ -322,7 +322,7 @@ const Index = () => {
                   className={`h-12 text-lg transition-all duration-300 ${
                     selectedQuickAmount === quickAmount 
                       ? 'bg-bank-green text-bank-background border-bank-green'
-                      : 'hover:border-bank-green hover:text-bank-green'
+                      : 'hover:border-bank-green hover:text-bank-green bg-white/10 hover:bg-white/20'
                   }`}
                   onClick={() => handleQuickAmountSelect(quickAmount)}
                 >
@@ -348,7 +348,7 @@ const Index = () => {
 
           <DialogFooter>
             <Button
-              className="w-full bg-bank-green hover:bg-bank-green/90 text-bank-background group"
+              className="w-full bg-bank-green hover:bg-opacity-90 text-bank-background group"
               onClick={handleDeposit}
               disabled={!amount}
             >
@@ -381,7 +381,7 @@ const Index = () => {
                   className={`h-12 text-lg transition-all duration-300 ${
                     selectedQuickAmount === quickAmount 
                       ? 'bg-bank-purple text-bank-background border-bank-purple'
-                      : 'hover:border-bank-purple hover:text-bank-purple'
+                      : 'hover:border-bank-purple hover:text-bank-purple bg-white/10 hover:bg-white/20'
                   }`}
                   onClick={() => handleQuickAmountSelect(quickAmount)}
                 >
@@ -407,7 +407,7 @@ const Index = () => {
 
           <DialogFooter>
             <Button
-              className="w-full bg-bank-purple hover:bg-bank-purple/90 text-bank-background group"
+              className="w-full bg-bank-purple hover:bg-opacity-90 text-bank-background group"
               onClick={handleWithdraw}
               disabled={!amount}
             >
@@ -450,7 +450,7 @@ const Index = () => {
                   className={`h-12 text-lg transition-all duration-300 ${
                     selectedQuickAmount === quickAmount 
                       ? 'bg-white text-bank-background border-white'
-                      : 'hover:border-white hover:text-white'
+                      : 'hover:border-white hover:text-white bg-white/10 hover:bg-white/20'
                   }`}
                   onClick={() => handleQuickAmountSelect(quickAmount)}
                 >
@@ -476,7 +476,7 @@ const Index = () => {
 
           <DialogFooter>
             <Button
-              className="w-full bg-white hover:bg-white/90 text-bank-background group"
+              className="w-full bg-white hover:bg-opacity-90 text-bank-background group"
               onClick={handleTransfer}
               disabled={!amount || !recipientId}
             >
