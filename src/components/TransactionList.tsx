@@ -17,10 +17,10 @@ export const TransactionList = ({ transactions }: TransactionListProps) => {
       {transactions.map((transaction) => (
         <div
           key={transaction.id}
-          className="flex items-center justify-between p-4 bg-bank-card rounded-lg"
+          className="flex items-center justify-between p-4 bg-bank-card rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300 group"
         >
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-bank-background rounded-full">
+            <div className="p-2 bg-gradient-to-br from-bank-background to-bank-background/50 rounded-full group-hover:scale-110 transition-transform">
               {transaction.amount.startsWith("+") ? (
                 <ArrowDownIcon className="w-4 h-4 text-bank-green" />
               ) : (
@@ -28,11 +28,17 @@ export const TransactionList = ({ transactions }: TransactionListProps) => {
               )}
             </div>
             <div>
-              <p className="text-white font-medium">{transaction.type}</p>
+              <p className="text-white font-medium group-hover:text-bank-green transition-colors">{transaction.type}</p>
               <p className="text-sm text-white/70">{transaction.description}</p>
             </div>
           </div>
-          <span className={transaction.amount.startsWith("+") ? "text-bank-green" : "text-bank-red"} style={{ fontWeight: 500 }}>
+          <span 
+            className={`font-medium transition-all duration-300 ${
+              transaction.amount.startsWith("+") 
+                ? "text-bank-green group-hover:text-bank-green/80" 
+                : "text-bank-red group-hover:text-bank-red/80"
+            }`}
+          >
             {transaction.amount}
           </span>
         </div>

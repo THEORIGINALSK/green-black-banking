@@ -8,6 +8,9 @@ interface BankCardProps {
 export const BankCard = ({ status, expiry }: BankCardProps) => {
   return (
     <Card className="w-full bg-gradient-to-br from-bank-card via-bank-card/90 to-accent/10 p-6 relative overflow-hidden backdrop-blur-sm shadow-xl border border-white/10 group transition-all duration-300 hover:shadow-accent/20">
+      {/* Glass morphism effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/0 pointer-events-none" />
+      
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:20px_20px]" />

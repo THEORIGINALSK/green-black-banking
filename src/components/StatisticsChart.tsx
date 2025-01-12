@@ -14,8 +14,8 @@ export const StatisticsChart = ({ data }: StatisticsChartProps) => {
         <AreaChart data={data}>
           <defs>
             <linearGradient id="colorAmount" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#22C55E" stopOpacity={0.3} />
-              <stop offset="95%" stopColor="#22C55E" stopOpacity={0} />
+              <stop offset="5%" stopColor="var(--bank-green)" stopOpacity={0.3} />
+              <stop offset="95%" stopColor="var(--bank-green)" stopOpacity={0} />
             </linearGradient>
           </defs>
           <XAxis
@@ -34,16 +34,17 @@ export const StatisticsChart = ({ data }: StatisticsChartProps) => {
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#141414",
-              border: "none",
+              backgroundColor: "var(--bank-card)",
+              border: "1px solid rgba(255,255,255,0.1)",
               borderRadius: "8px",
               color: "#FFFFFF",
+              boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
             }}
           />
           <Area
             type="monotone"
             dataKey="amount"
-            stroke="#22C55E"
+            stroke="var(--bank-green)"
             fillOpacity={1}
             fill="url(#colorAmount)"
           />
