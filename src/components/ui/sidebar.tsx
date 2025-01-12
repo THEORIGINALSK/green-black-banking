@@ -12,8 +12,8 @@ export function Sidebar() {
       {/* Top Navigation Tabs */}
       <div className="flex flex-col p-4 border-b border-white/10">
         <div className="text-center relative mb-8">
-          <h1 className="text-2xl font-bold relative z-10">
-            <span className="text-bank-green inline-block animate-pulse hover:animate-none relative after:content-[''] after:absolute after:-inset-2 after:bg-bank-green/20 after:rounded-lg after:blur-lg after:opacity-0 hover:after:opacity-100 after:transition-opacity">
+          <h1 className="text-3xl font-bold relative z-10">
+            <span className="text-bank-purple inline-block animate-pulse hover:animate-none relative after:content-[''] after:absolute after:-inset-2 after:bg-bank-purple/20 after:rounded-lg after:blur-lg after:opacity-0 hover:after:opacity-100 after:transition-opacity">
               WIIC CITY
             </span>
             <br />
@@ -21,15 +21,15 @@ export function Sidebar() {
               BANKING
             </span>
           </h1>
-          <div className="absolute -inset-4 bg-gradient-to-r from-bank-green/0 via-bank-green/10 to-bank-purple/0 blur-lg opacity-50 animate-pulse"></div>
+          <div className="absolute -inset-4 bg-gradient-to-r from-bank-purple/0 via-bank-purple/10 to-bank-purple/0 blur-lg opacity-50 animate-pulse"></div>
         </div>
 
         <div className="grid grid-cols-2 gap-2 mb-4">
-          <button className="w-full py-3 px-4 rounded-lg bg-bank-card text-bank-green border border-bank-green/20 hover:bg-bank-green/10 transition-all">
+          <button className="w-full py-3 px-4 rounded-lg bg-bank-card text-bank-green border border-bank-green/20 hover:bg-bank-green/10 transition-all text-lg">
             Personal
           </button>
           {hasSociety && (
-            <button className="w-full py-3 px-4 rounded-lg bg-bank-card text-bank-purple border border-bank-purple/20 hover:bg-bank-purple/10 transition-all">
+            <button className="w-full py-3 px-4 rounded-lg bg-bank-card text-bank-purple border border-bank-purple/20 hover:bg-bank-purple/10 transition-all text-lg">
               Society
             </button>
           )}
@@ -58,7 +58,7 @@ export function Sidebar() {
 
       {/* Logout Section */}
       <div className="p-4 border-t border-white/10">
-        <button className="w-full flex items-center px-4 py-3 text-red-500 hover:text-red-400 transition-colors rounded-lg hover:bg-white/5 group">
+        <button className="w-full flex items-center px-4 py-3 text-red-500 hover:text-red-400 transition-colors rounded-lg hover:bg-white/5 group text-lg">
           <LogOut className="w-5 h-5 mr-3 transition-transform group-hover:-translate-x-1" />
           <span>Logout</span>
         </button>
@@ -77,9 +77,9 @@ const NavLink = ({ to, icon: Icon, children }: NavLinkProps) => {
   return (
     <Link
       to={to}
-      className="flex items-center px-4 py-3 text-gray-300 hover:text-bank-green transition-colors rounded-lg hover:bg-white/5 group"
+      className="flex items-center px-4 py-3 text-gray-300 hover:text-bank-green transition-colors rounded-lg hover:bg-white/5 group text-lg"
     >
-      <Icon className="w-5 h-5 mr-3 transition-transform group-hover:scale-110" />
+      <Icon className="w-6 h-6 mr-3 transition-transform group-hover:scale-110" />
       <span className="transition-colors">{children}</span>
     </Link>
   )
