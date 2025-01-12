@@ -15,11 +15,11 @@ interface ThemeContextType {
 }
 
 const defaultColors: ThemeColors = {
-  background: '#0a0a0a', // Current black
-  card: '#1a1a1a',      // Current card background
-  primary: '#50fa7b',   // Current green
-  accent: '#bd93f9',    // Current purple
-  text: '#ffffff'       // White text
+  background: '#0a0a0a',
+  card: '#1a1a1a',
+  primary: '#50fa7b',
+  accent: '#bd93f9',
+  text: '#ffffff'
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -31,17 +31,25 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   });
 
   useEffect(() => {
+    // Save to localStorage
     localStorage.setItem('theme-colors', JSON.stringify(colors));
     
-    // Update CSS variables
-    document.documentElement.style.setProperty('--bank-background', colors.background);
-    document.documentElement.style.setProperty('--bank-card', colors.card);
-    document.documentElement.style.setProperty('--bank-green', colors.primary);
-    document.documentElement.style.setProperty('--bank-purple', colors.accent);
+    // Update CSS custom properties
+    const root = document.documentElement;
+    root.style.setProperty('--bank-background', colors.background);
+    root.style.setProperty('--bank-card', colors.card);
+    root.style.setProperty('--bank-green', colors.primary);
+    root.style.setProperty('--bank-purple', colors.accent);
+
+    // Force a re-render of components using these colors
+    document.body.style.backgroundColor = colors.background;
   }, [colors]);
 
   const updateColors = (newColors: Partial<ThemeColors>) => {
-    setColors(prev => ({ ...prev, ...newColors }));
+    setColors(prev => {
+      const updated = { ...prev, ...newColors };
+      return updated;
+    });
   };
 
   const resetColors = () => {
